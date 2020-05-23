@@ -1,6 +1,9 @@
 project(trayracer2)
 
-set(TRAYRACER2_SOURCES main.cpp log.cpp application.cpp
+set(TRAYRACER2_SOURCES
+		core/main.cpp
+		core/log.cpp
+		core/application.cpp
 		platform/linux/linux_window.cpp
 		platform/linux/linux_input.cpp
 		platform/opengl/opengl_context.cpp)

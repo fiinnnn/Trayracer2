@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "core.h"
+#include "core/core.h"
 #include "events/events.h"
 #include "platform/opengl/opengl_context.h"
 

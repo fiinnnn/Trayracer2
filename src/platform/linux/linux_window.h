@@ -4,7 +4,7 @@
 #include <string>
 #include <GLFW/glfw3.h>
 
-#include "window.h"
+#include "core/window.h"
 
 namespace Trayracer2 {
 

@@ -1,7 +1,7 @@
 #ifndef CORE_H
 #define CORE_H
 
-#include "log.h"
+#include "core/log.h"
 
 #include <memory>
 

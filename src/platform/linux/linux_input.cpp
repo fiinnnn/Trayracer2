@@ -2,8 +2,8 @@
 
 #include <GLFW/glfw3.h>
 
-#include "application.h"
-#include "window.h"
+#include "core/application.h"
+#include "core/window.h"
 
 namespace Trayracer2 {
 
