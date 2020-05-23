@@ -5,11 +5,10 @@
 
 #include "core.h"
 
-namespace Trayracer2
-{
+namespace Trayracer2 {
 
 OpenGLContext::OpenGLContext(GLFWwindow *windowHandle)
-	: m_windowHandle(windowHandle)
+    : m_windowHandle(windowHandle)
 {
 	ASSERT(windowHandle, "Window handle is null");
 }

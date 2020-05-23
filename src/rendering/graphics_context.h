@@ -1,8 +1,7 @@
 #ifndef GRAPHICS_CONTEXT_H
 #define GRAPHICS_CONTEXT_H
 
-namespace Trayracer2
-{
+namespace Trayracer2 {
 
 class GraphicsContext {
 public:

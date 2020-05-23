@@ -2,6 +2,7 @@ project(trayracer2)
 
 set(TRAYRACER2_SOURCES main.cpp log.cpp application.cpp
 		platform/linux/linux_window.cpp
+		platform/linux/linux_input.cpp
 		platform/opengl/opengl_context.cpp)
 
 set(TRAYRACER2_LIBRARIES

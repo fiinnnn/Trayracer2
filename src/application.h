@@ -2,11 +2,15 @@
 #define APPLICATION_H
 
 #include <memory>
+#include <queue>
 
 #include "core.h"
-#include "window.h"
 
 namespace Trayracer2 {
+
+class Window;
+class Event;
+class WindowClosedEvent;
 
 class Application {
 public:
@@ -15,12 +19,25 @@ public:
 
 	void run();
 
+	void onEvent(const Ref<Event>& e);
+
+	[[nodiscard]] inline static Application& get() { return *m_instance; }
+
+	[[nodiscard]] inline Window& getWindow() { return *m_window; }
+
+private:
+	void handleEvents();
+
+	bool onWindowClosed(WindowClosedEvent& e);
+
 private:
 	static Application* m_instance;
 
 	bool m_running = true;
 
-	std::unique_ptr<Window> m_window;
+	Scope<Window> m_window;
+
+	std::queue<Ref<Event>> m_eventQueue;
 };
 
 }

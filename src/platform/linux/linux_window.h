@@ -12,21 +12,26 @@ class GraphicsContext;
 
 class LinuxWindow : public Window {
 public:
-	LinuxWindow(const WindowCfg& cfg);
-	virtual ~LinuxWindow();
+	explicit LinuxWindow(const WindowCfg& cfg);
+	~LinuxWindow() override;
 
 	void update() override;
 
-	inline unsigned int getWidth() const override { return m_data.width; }
-	inline unsigned int getHeight() const override { return m_data.height; }
+	[[nodiscard]] inline unsigned int getWidth() const override { return m_data.width; }
+	[[nodiscard]] inline unsigned int getHeight() const override { return m_data.height; }
 
 	inline void setVsync(bool enabled) override;
-	inline bool getVsync() const override { return m_data.vsync; }
+	[[nodiscard]] inline bool getVsync() const override { return m_data.vsync; }
+
+	inline void setEventCallback(const EventCallback& callback) override { m_data.eventCallback = callback; }
+
+	[[nodiscard]] inline void* getNativeWindow() const override { return m_window; }
 
 private:
 	void init(const WindowCfg& cfg);
 	void close();
 
+private:
 	GLFWwindow* m_window;
 	GraphicsContext* m_context;
 
@@ -34,6 +39,8 @@ private:
 		std::string title;
 		unsigned int width, height;
 		bool vsync;
+
+		EventCallback eventCallback;
 	};
 
 	WindowData m_data;

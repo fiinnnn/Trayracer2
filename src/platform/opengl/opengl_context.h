@@ -9,7 +9,7 @@ namespace Trayracer2 {
 
 class OpenGLContext : public GraphicsContext {
 public:
-	OpenGLContext(GLFWwindow* windowHandle);
+	explicit OpenGLContext(GLFWwindow* windowHandle);
 
 	void init() override;
 	void swapBuffers() override;
