@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "core.h"
+#include "platform/opengl/opengl_context.h"
 
 namespace Trayracer2
 {
@@ -52,11 +53,12 @@ void LinuxWindow::init(const WindowCfg &cfg)
 	m_window = glfwCreateWindow((int)m_data.width, (int)m_data.height,
 			m_data.title.c_str(), nullptr, nullptr);
 
-	//TODO: initialize OpenGL context
+	m_context = new OpenGLContext(m_window);
+	m_context->init();
 
 	glfwSetWindowUserPointer(m_window, &m_data);
 
-	//setVsync(true);
+	setVsync(true);
 
 	//TODO: setup event handlers
 }
@@ -70,7 +72,7 @@ void LinuxWindow::close()
 void LinuxWindow::update()
 {
 	glfwPollEvents();
-	//TODO: swap buffers
+	m_context->swapBuffers();
 }
 
 void LinuxWindow::setVsync(bool enabled)

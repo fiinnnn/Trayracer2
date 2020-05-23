@@ -8,6 +8,8 @@
 
 namespace Trayracer2 {
 
+class GraphicsContext;
+
 class LinuxWindow : public Window {
 public:
 	LinuxWindow(const WindowCfg& cfg);
@@ -26,6 +28,7 @@ private:
 	void close();
 
 	GLFWwindow* m_window;
+	GraphicsContext* m_context;
 
 	struct WindowData {
 		std::string title;
