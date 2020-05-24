@@ -1,15 +1,23 @@
 #include "application.h"
 
-#include <glad/glad.h>
-#include <imgui.h>
+#include <glm/glm.hpp>
 
 #include <memory>
 
 #include "core.h"
 #include "window.h"
+
 #include "events/events.h"
+
 #include "input/input.h"
+
 #include "imgui/imgui_renderer.h"
+
+#include "rendering/render_command.h"
+#include "rendering/texture2d.h"
+
+#include "gui/viewport.h"
+#include "gui/dockspace.h"
 
 namespace Trayracer2 {
 
@@ -24,6 +32,20 @@ Application::Application()
 	m_window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
 
 	m_imguiRenderer = createScope<ImGuiRenderer>();
+
+	m_renderTargetTexture = Texture2D::create(512, 512);
+
+	// temporary test texture
+	float buffer[512*512*3];
+	for (int i = 0; i < 512 * 512 * 3; i+=3) {
+		if (i % 10){
+			buffer[i] = 1.0;
+			buffer[i+1] = 0.5;
+			buffer[i+3] = 0.0;
+		}
+	}
+
+	m_renderTargetTexture->update((void*)buffer);
 
 	LOG_INFO("Application initialized");
 }
@@ -40,12 +62,14 @@ void Application::run()
 		if (Input::keyPressed(KEY_ESCAPE))
 			m_running = false;
 
-		glClearColor(0.2, 0.2, 0.2, 1.0);
-		glClear(GL_COLOR_BUFFER_BIT);
+		RenderCommand::setClearColor(glm::vec4(0.2, 0.2, 0.2, 1.0));
+		RenderCommand::clear();
 
 		m_imguiRenderer->begin();
-		bool show = true;
-		ImGui::ShowDemoWindow(&show);
+
+		Dockspace::show();
+		Viewport::show("Viewport", m_renderTargetTexture->getID());
+
 		m_imguiRenderer->end();
 	}
 }

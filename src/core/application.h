@@ -12,6 +12,7 @@ class Window;
 class Event;
 class WindowClosedEvent;
 class ImGuiRenderer;
+class Texture2D;
 
 class Application {
 public:
@@ -41,6 +42,8 @@ private:
 	std::queue<Ref<Event>> m_eventQueue;
 
 	Scope<ImGuiRenderer> m_imguiRenderer;
+
+	Ref<Texture2D> m_renderTargetTexture;
 };
 
 }
