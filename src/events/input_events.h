@@ -12,7 +12,7 @@ class KeyEvent : public Event {
 public:
 	[[nodiscard]] inline int getKeyCode() const { return m_keycode; }
 
-	[[nodiscard]] int getCategories() const override { return EventCategory::INPUT | EventCategory::KEYBOARD; }
+	[[nodiscard]] int getCategories() const override { return EventCategory::ECInput | EventCategory::ECKeyboard; }
 
 protected:
 	explicit KeyEvent(int keycode)
@@ -30,8 +30,8 @@ public:
 
 	[[nodiscard]] inline bool getRepeated() const { return m_repeated; }
 
-	[[nodiscard]] static EventType getStaticType() { return EventType::KEY_PRESSED; }
-	[[nodiscard]] EventType getType() const override { return EventType::KEY_PRESSED; }
+	[[nodiscard]] static EventType getStaticType() { return EventType::KeyPressed; }
+	[[nodiscard]] EventType getType() const override { return EventType::KeyPressed; }
 
 	[[nodiscard]] std::string toString() const override
 	{
@@ -50,8 +50,8 @@ public:
 			: KeyEvent(keycode)
 	{}
 
-	[[nodiscard]] static EventType getStaticType() { return EventType::KEY_RELEASED; }
-	[[nodiscard]] EventType getType() const override { return EventType::KEY_RELEASED; }
+	[[nodiscard]] static EventType getStaticType() { return EventType::KeyReleased; }
+	[[nodiscard]] EventType getType() const override { return EventType::KeyReleased; }
 
 	[[nodiscard]] std::string toString() const override
 	{
@@ -67,8 +67,8 @@ public:
 			: KeyEvent(keycode)
 	{}
 
-	[[nodiscard]] static EventType getStaticType() { return EventType::KEY_TYPED; }
-	[[nodiscard]] EventType getType() const override { return EventType::KEY_TYPED; }
+	[[nodiscard]] static EventType getStaticType() { return EventType::KeyTyped; }
+	[[nodiscard]] EventType getType() const override { return EventType::KeyTyped; }
 
 	[[nodiscard]] std::string toString() const override
 	{
@@ -82,7 +82,7 @@ class MouseButtonEvent : public Event {
 public:
 	[[nodiscard]] inline int getMouseButton() const { return m_button; }
 
-	[[nodiscard]] int getCategories() const override { return EventCategory::INPUT | EventCategory::MOUSE; }
+	[[nodiscard]] int getCategories() const override { return EventCategory::ECInput | EventCategory::ECMouse; }
 
 protected:
 	explicit MouseButtonEvent(int button)
@@ -98,8 +98,8 @@ public:
 	    : MouseButtonEvent(button)
 	{}
 
-	[[nodiscard]] static EventType getStaticType() { return EventType::MOUSE_PRESSED; }
-	[[nodiscard]] EventType getType() const override { return EventType::MOUSE_PRESSED; }
+	[[nodiscard]] static EventType getStaticType() { return EventType::MousePressed; }
+	[[nodiscard]] EventType getType() const override { return EventType::MousePressed; }
 
 	[[nodiscard]] std::string toString() const override
 	{
@@ -115,8 +115,8 @@ public:
 			: MouseButtonEvent(button)
 	{}
 
-	[[nodiscard]] static EventType getStaticType() { return EventType::MOUSE_RELEASED; }
-	[[nodiscard]] EventType getType() const override { return EventType::MOUSE_RELEASED; }
+	[[nodiscard]] static EventType getStaticType() { return EventType::MouseReleased; }
+	[[nodiscard]] EventType getType() const override { return EventType::MouseReleased; }
 
 	[[nodiscard]] std::string toString() const override
 	{
@@ -135,9 +135,9 @@ public:
 	[[nodiscard]] inline float getX() const { return m_x; }
 	[[nodiscard]] inline float getY() const { return m_y; }
 
-	[[nodiscard]] static EventType getStaticType() { return EventType::MOUSE_MOVED; }
-	[[nodiscard]] EventType getType() const override { return EventType::MOUSE_MOVED; }
-	[[nodiscard]] int getCategories() const override { return EventCategory::INPUT | EventCategory::MOUSE; }
+	[[nodiscard]] static EventType getStaticType() { return EventType::MouseMoved; }
+	[[nodiscard]] EventType getType() const override { return EventType::MouseMoved; }
+	[[nodiscard]] int getCategories() const override { return EventCategory::ECInput | EventCategory::ECMouse; }
 
 	[[nodiscard]] std::string toString() const override
 	{
@@ -159,9 +159,9 @@ public:
 	[[nodiscard]] inline float getOffsetX() const { return m_offsetX; }
 	[[nodiscard]] inline float getOffsetY() const { return m_offsetY; }
 
-	[[nodiscard]] static EventType getStaticType() { return EventType::MOUSE_SCROLLED; }
-	[[nodiscard]] EventType getType() const override { return EventType::MOUSE_SCROLLED; }
-	[[nodiscard]] int getCategories() const override { return EventCategory::INPUT | EventCategory::MOUSE; }
+	[[nodiscard]] static EventType getStaticType() { return EventType::MouseScrolled; }
+	[[nodiscard]] EventType getType() const override { return EventType::MouseScrolled; }
+	[[nodiscard]] int getCategories() const override { return EventCategory::ECInput | EventCategory::ECMouse; }
 
 	[[nodiscard]] std::string toString() const override
 	{

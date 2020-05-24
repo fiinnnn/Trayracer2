@@ -7,24 +7,24 @@
 namespace Trayracer2 {
 
 enum class EventType {
-	NONE,
-	WINDOW_CLOSED,
-	WINDOW_RESIZED,
-	KEY_PRESSED,
-	KEY_RELEASED,
-	KEY_TYPED,
-	MOUSE_PRESSED,
-	MOUSE_RELEASED,
-	MOUSE_MOVED,
-	MOUSE_SCROLLED
+	None,
+	WindowClosed,
+	WindowResized,
+	KeyPressed,
+	KeyReleased,
+	KeyTyped,
+	MousePressed,
+	MouseReleased,
+	MouseMoved,
+	MouseScrolled
 };
 
 enum EventCategory {
-	NONE,
-	APPLICATION = (1 << 0),
-	INPUT       = (1 << 1),
-	KEYBOARD    = (1 << 2),
-	MOUSE       = (1 << 3)
+	None,
+	ECApplication = (1 << 0),
+	ECInput       = (1 << 1),
+	ECKeyboard    = (1 << 2),
+	ECMouse       = (1 << 3)
 };
 
 
