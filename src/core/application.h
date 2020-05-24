@@ -11,6 +11,7 @@ namespace Trayracer2 {
 class Window;
 class Event;
 class WindowClosedEvent;
+class ImGuiRenderer;
 
 class Application {
 public:
@@ -38,6 +39,8 @@ private:
 	Scope<Window> m_window;
 
 	std::queue<Ref<Event>> m_eventQueue;
+
+	Scope<ImGuiRenderer> m_imguiRenderer;
 };
 
 }

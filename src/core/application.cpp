@@ -1,11 +1,15 @@
 #include "application.h"
 
 #include <glad/glad.h>
+#include <imgui.h>
+
+#include <memory>
 
 #include "core.h"
 #include "window.h"
 #include "events/events.h"
 #include "input/input.h"
+#include "imgui/imgui_renderer.h"
 
 namespace Trayracer2 {
 
@@ -18,6 +22,8 @@ Application::Application()
 
 	m_window = std::unique_ptr<Window>(Window::create());
 	m_window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
+
+	m_imguiRenderer = createScope<ImGuiRenderer>();
 
 	LOG_INFO("Application initialized");
 }
@@ -36,6 +42,11 @@ void Application::run()
 
 		glClearColor(0.2, 0.2, 0.2, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		m_imguiRenderer->begin();
+		bool show = true;
+		ImGui::ShowDemoWindow(&show);
+		m_imguiRenderer->end();
 	}
 }
 
@@ -48,8 +59,6 @@ void Application::handleEvents()
 {
 	while (!m_eventQueue.empty()) {
 		Ref<Event> e = m_eventQueue.front();
-
-		LOG_INFO(e->toString());
 
 		EventDispatcher d(*e);
 		d.dispatch<WindowClosedEvent>(BIND_EVENT_FN(Application::onWindowClosed));
