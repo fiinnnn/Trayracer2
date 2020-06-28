@@ -6,11 +6,11 @@ namespace Trayracer2 {
 
 class ImGuiRenderer {
 public:
-	ImGuiRenderer();
-	~ImGuiRenderer();
+    ImGuiRenderer();
+    ~ImGuiRenderer();
 
-	static void begin();
-	static void end();
+    static void begin();
+    static void end();
 };
 
 }

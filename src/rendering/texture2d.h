@@ -7,22 +7,25 @@ namespace Trayracer2 {
 
 class Texture2D {
 public:
-	virtual ~Texture2D() = default;
+    virtual ~Texture2D() = default;
 
-	static Ref<Texture2D> create(unsigned int width, unsigned int height);
+    static Ref<Texture2D> create(unsigned int width, unsigned int height);
 
-	[[nodiscard]] virtual unsigned int getWidth() const { return m_width; };
-	[[nodiscard]] virtual unsigned int getHeight() const { return m_height; };
+    [[nodiscard]] virtual unsigned int getWidth() const
+    { return m_width; };
 
-	[[nodiscard]] virtual unsigned int getID() const = 0;
+    [[nodiscard]] virtual unsigned int getHeight() const
+    { return m_height; };
 
-	virtual void update(void* buffer) = 0;
+    [[nodiscard]] virtual unsigned int getID() const = 0;
+
+    virtual void update(void* buffer) = 0;
 
 protected:
-	Texture2D(unsigned int width, unsigned int height);
+    Texture2D(unsigned int width, unsigned int height);
 
 protected:
-	unsigned int m_width, m_height;
+    unsigned int m_width, m_height;
 };
 
 }

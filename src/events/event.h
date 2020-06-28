@@ -7,48 +7,49 @@
 namespace Trayracer2 {
 
 enum class EventType {
-	None,
-	WindowClosed,
-	WindowResized,
-	KeyPressed,
-	KeyReleased,
-	KeyTyped,
-	MousePressed,
-	MouseReleased,
-	MouseMoved,
-	MouseScrolled
+    None,
+    WindowClosed,
+    WindowResized,
+    KeyPressed,
+    KeyReleased,
+    KeyTyped,
+    MousePressed,
+    MouseReleased,
+    MouseMoved,
+    MouseScrolled
 };
 
 enum EventCategory {
-	None,
-	ECApplication = (1 << 0),
-	ECInput       = (1 << 1),
-	ECKeyboard    = (1 << 2),
-	ECMouse       = (1 << 3)
+    None,
+    ECApplication = (1 << 0),
+    ECInput       = (1 << 1),
+    ECKeyboard    = (1 << 2),
+    ECMouse       = (1 << 3)
 };
 
 
-
 class Event {
-	friend class EventDispatcher;
+    friend class EventDispatcher;
 
 public:
-	virtual ~Event() = default;
+    virtual ~Event() = default;
 
-	[[nodiscard]] virtual EventType getType() const = 0;
-	[[nodiscard]] virtual int getCategories() const = 0;
+    [[nodiscard]] virtual EventType getType() const = 0;
 
-	[[nodiscard]] virtual std::string toString() const = 0;
+    [[nodiscard]] virtual int getCategories() const = 0;
 
-	[[nodiscard]] inline bool handled() const { return m_handled; }
+    [[nodiscard]] virtual std::string toString() const = 0;
+
+    [[nodiscard]] inline bool handled() const
+    { return m_handled; }
 
 protected:
-	bool m_handled = false;
+    bool m_handled = false;
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Event& e)
 {
-	return os << e.toString();
+    return os << e.toString();
 }
 
 }

@@ -9,41 +9,48 @@
 namespace Trayracer2 {
 
 class Window;
+
 class Event;
+
 class WindowClosedEvent;
+
 class ImGuiRenderer;
+
 class Texture2D;
 
 class Application {
 public:
-	Application();
-	virtual ~Application();
+    Application();
 
-	void run();
+    virtual ~Application();
 
-	void onEvent(const Ref<Event>& e);
+    void run();
 
-	[[nodiscard]] inline static Application& get() { return *m_instance; }
+    void onEvent(const Ref<Event>& e);
 
-	[[nodiscard]] inline Window& getWindow() { return *m_window; }
+    [[nodiscard]] inline static Application& get()
+    { return *m_instance; }
 
-private:
-	void handleEvents();
-
-	bool onWindowClosed(WindowClosedEvent& e);
+    [[nodiscard]] inline Window& getWindow()
+    { return *m_window; }
 
 private:
-	static Application* m_instance;
+    void handleEvents();
 
-	bool m_running = true;
+    bool onWindowClosed(WindowClosedEvent& e);
 
-	Scope<Window> m_window;
+private:
+    static Application* m_instance;
 
-	std::queue<Ref<Event>> m_eventQueue;
+    bool m_running = true;
 
-	Scope<ImGuiRenderer> m_imguiRenderer;
+    Scope<Window> m_window;
 
-	Ref<Texture2D> m_renderTargetTexture;
+    std::queue<Ref<Event>> m_eventQueue;
+
+    Scope<ImGuiRenderer> m_imguiRenderer;
+
+    Ref<Texture2D> m_renderTargetTexture;
 };
 
 }

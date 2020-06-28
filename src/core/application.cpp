@@ -25,76 +25,77 @@ Application* Application::m_instance = nullptr;
 
 Application::Application()
 {
-	ASSERT(!m_instance, "Application already exists");
-	m_instance = this;
+    ASSERT(!m_instance, "Application already exists");
+    m_instance = this;
 
-	m_window = std::unique_ptr<Window>(Window::create());
-	m_window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
+    m_window = std::unique_ptr<Window>(Window::create());
+    m_window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
 
-	m_imguiRenderer = createScope<ImGuiRenderer>();
+    m_imguiRenderer = createScope<ImGuiRenderer>();
 
-	m_renderTargetTexture = Texture2D::create(512, 512);
+    m_renderTargetTexture = Texture2D::create(512, 512);
 
-	// temporary test texture
-	float buffer[512*512*3];
-	for (int i = 0; i < 512 * 512 * 3; i+=3) {
-		if (i % 10){
-			buffer[i] = 1.0;
-			buffer[i+1] = 0.5;
-			buffer[i+3] = 0.0;
-		}
-	}
+    // temporary test texture
+    float buffer[512 * 512 * 3];
+    for (int i = 0; i < 512 * 512 * 3; i += 3) {
+        if (i % 10) {
+            buffer[i] = 1.0;
+            buffer[i + 1] = 0.5;
+            buffer[i + 3] = 0.0;
+        }
+    }
 
-	m_renderTargetTexture->update((void*)buffer);
+    m_renderTargetTexture->update((void*) buffer);
 
-	LOG_INFO("Application initialized");
+    LOG_INFO("Application initialized");
 }
 
 Application::~Application() = default;
 
 void Application::run()
 {
-	while (m_running) {
-		m_window->update();
+    while (m_running) {
+        m_window->update();
 
-		handleEvents();
+        handleEvents();
 
-		if (Input::keyPressed(KEY_ESCAPE))
-			m_running = false;
+        if (Input::keyPressed(KEY_ESCAPE))
+            m_running = false;
 
-		RenderCommand::setClearColor(glm::vec4(0.2, 0.2, 0.2, 1.0));
-		RenderCommand::clear();
+        RenderCommand::setClearColor(glm::vec4(0.2, 0.2, 0.2, 1.0));
+        RenderCommand::clear();
 
-		m_imguiRenderer->begin();
+        m_imguiRenderer->begin();
 
-		Dockspace::show();
-		Viewport::show("Viewport", m_renderTargetTexture->getID());
+        Dockspace::show();
+        Viewport::show("Viewport", m_renderTargetTexture->getID());
 
-		m_imguiRenderer->end();
-	}
+        m_imguiRenderer->end();
+    }
 }
 
 void Application::onEvent(const Ref<Event>& e)
 {
-	m_eventQueue.push(e);
+    m_eventQueue.push(e);
 }
 
 void Application::handleEvents()
 {
-	while (!m_eventQueue.empty()) {
-		Ref<Event> e = m_eventQueue.front();
+    while (!m_eventQueue.empty()) {
+        Ref<Event> e = m_eventQueue.front();
 
-		EventDispatcher d(*e);
-		d.dispatch<WindowClosedEvent>(BIND_EVENT_FN(Application::onWindowClosed));
+        EventDispatcher d(*e);
+        d.dispatch<WindowClosedEvent>(
+                BIND_EVENT_FN(Application::onWindowClosed));
 
-		m_eventQueue.pop();
-	}
+        m_eventQueue.pop();
+    }
 }
 
-bool Application::onWindowClosed(WindowClosedEvent &e)
+bool Application::onWindowClosed(WindowClosedEvent& e)
 {
-	m_running = false;
-	return true;
+    m_running = false;
+    return true;
 }
 
 }

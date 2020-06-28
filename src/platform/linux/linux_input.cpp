@@ -11,27 +11,27 @@ Input* Input::m_instance = new LinuxInput();
 
 bool LinuxInput::keyPressedImpl(int keycode)
 {
-	GLFWwindow* window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
+    GLFWwindow* window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
 
-	int state = glfwGetKey(window, keycode);
-	return state == GLFW_PRESS || state == GLFW_REPEAT;
+    int state = glfwGetKey(window, keycode);
+    return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 
 bool LinuxInput::mousePressedImpl(int button)
 {
-	GLFWwindow* window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
+    GLFWwindow* window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
 
-	int state = glfwGetMouseButton(window, button);
-	return state == GLFW_PRESS;
+    int state = glfwGetMouseButton(window, button);
+    return state == GLFW_PRESS;
 }
 
 std::pair<float, float> LinuxInput::getMousePosImpl()
 {
-	GLFWwindow* window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
+    GLFWwindow* window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
 
-	double xpos, ypos;
-	glfwGetCursorPos(window, &xpos, &ypos);
-	return { (float)xpos, (float)ypos };
+    double xpos, ypos;
+    glfwGetCursorPos(window, &xpos, &ypos);
+    return {(float) xpos, (float) ypos};
 }
 
 }

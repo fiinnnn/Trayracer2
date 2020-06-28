@@ -5,7 +5,7 @@ namespace Trayracer2 {
 
 class Dockspace {
 public:
-	static void show();
+    static void show();
 };
 
 }

@@ -9,10 +9,10 @@ namespace Trayracer2 {
 
 class LinuxInput : public Input {
 protected:
-	bool keyPressedImpl(int keycode) override;
+    bool keyPressedImpl(int keycode) override;
 
-	bool mousePressedImpl(int button) override;
-	std::pair<float, float> getMousePosImpl() override;
+    bool mousePressedImpl(int button) override;
+    std::pair<float, float> getMousePosImpl() override;
 };
 
 }

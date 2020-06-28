@@ -7,18 +7,19 @@ namespace Trayracer2 {
 
 class RendererAPI {
 public:
-	enum class API {
-		None   = 0,
-		OpenGL = 1
-	};
+    enum class API {
+        None   = 0,
+        OpenGL = 1
+    };
 
-	inline static API getAPI() { return m_api; }
+    inline static API getAPI()
+    { return m_api; }
 
-	virtual void setClearColor(const glm::vec4& color) = 0;
-	virtual void clear() = 0;
+    virtual void setClearColor(const glm::vec4& color) = 0;
+    virtual void clear() = 0;
 
 private:
-	static API m_api;
+    static API m_api;
 };
 
 }

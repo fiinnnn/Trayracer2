@@ -7,7 +7,7 @@ namespace Trayracer2 {
 
 class Viewport {
 public:
-	static void show(const std::string& title, unsigned int textureID);
+    static void show(const std::string& title, unsigned int textureID);
 };
 
 }

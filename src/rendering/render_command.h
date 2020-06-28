@@ -9,18 +9,18 @@ namespace Trayracer2 {
 
 class RenderCommand {
 public:
-	inline static void setClearColor(const glm::vec4& color)
-	{
-		m_rendererAPI->setClearColor(color);
-	}
+    inline static void setClearColor(const glm::vec4& color)
+    {
+        m_rendererAPI->setClearColor(color);
+    }
 
-	inline static void clear()
-	{
-		m_rendererAPI->clear();
-	}
+    inline static void clear()
+    {
+        m_rendererAPI->clear();
+    }
 
 private:
-	static RendererAPI* m_rendererAPI;
+    static RendererAPI* m_rendererAPI;
 };
 
 }

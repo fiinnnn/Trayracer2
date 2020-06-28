@@ -9,8 +9,8 @@ namespace Trayracer2 {
 
 class OpenGLRendererAPI : public RendererAPI {
 public:
-	void setClearColor(const glm::vec4& color) override;
-	void clear() override;
+    void setClearColor(const glm::vec4& color) override;
+    void clear() override;
 };
 
 }
