@@ -14,16 +14,19 @@
 #include "imgui/imgui_renderer.h"
 
 #include "rendering/render_command.h"
-#include "rendering/texture2d.h"
 
 #include "gui/viewport.h"
 #include "gui/dockspace.h"
+#include "gui/scene_overview.h"
+#include "gui/object_properties.h"
+#include "gui/settings_ui.h"
+#include "gui/menu_bar.h"
 
 namespace Trayracer2 {
 
 Application* Application::m_instance = nullptr;
 
-Application::Application() : m_viewport()
+Application::Application()
 {
     ASSERT(!m_instance, "Application already exists");
     m_instance = this;
@@ -36,8 +39,6 @@ Application::Application() : m_viewport()
     m_raytracer = createScope<Raytracer>();
 
     m_imguiRenderer = createScope<ImGuiRenderer>();
-
-    m_viewport = createScope<Viewport>();
 
     LOG_INFO("Application initialized");
 }
@@ -60,9 +61,13 @@ void Application::run()
         m_imguiRenderer->begin();
 
         Dockspace::show();
-        m_viewport->show("Viewport", *m_raytracer);
+        Viewport::show(*m_raytracer);
+        SceneOverview::show(m_raytracer->getScene());
+        ObjectProperties::show();
+        SettingsUI::show();
+        MenuBar::show();
 
-        m_raytracer->trace();
+        //m_raytracer->trace();
 
         m_imguiRenderer->end();
     }

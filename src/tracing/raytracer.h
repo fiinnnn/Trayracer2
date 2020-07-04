@@ -5,6 +5,7 @@
 
 #include "core/core.h"
 #include "rendering/texture2d.h"
+#include "scene.h"
 
 namespace Trayracer2 {
 
@@ -25,14 +26,6 @@ struct Ray {
     glm::vec3 dir;
 };
 
-struct Sphere {
-    Sphere(glm::vec3 position, float r) : position(position), r(r)
-    {}
-
-    glm::vec3 position;
-    float r;
-};
-
 class Raytracer {
 public:
     Raytracer();
@@ -41,12 +34,23 @@ public:
 
     void resize(unsigned int width, unsigned int height);
 
-    unsigned int getRenderTargetID()
+    [[nodiscard]] unsigned int getWidth() const
+    { return m_renderTarget->getWidth(); }
+
+    [[nodiscard]] unsigned int getHeight() const
+    { return m_renderTarget->getHeight(); }
+
+    [[nodiscard]] unsigned int getRenderTargetID() const
     { return m_renderTarget->getID(); }
+
+    [[nodiscard]] Ref<Scene> getScene() const
+    { return m_scene; }
 
 private:
     Ref<Texture2D> m_renderTarget;
     Color* m_buffer;
+
+    Ref<Scene> m_scene;
 };
 
 }

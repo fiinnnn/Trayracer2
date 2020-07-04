@@ -1,7 +1,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include<utility>
+#include <utility>
 
 #include "keycodes.h"
 #include "buttoncodes.h"

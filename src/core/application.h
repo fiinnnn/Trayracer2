@@ -14,7 +14,6 @@ class WindowClosedEvent;
 class ImGuiRenderer;
 class Texture2D;
 class Raytracer;
-class Viewport;
 
 class Application {
 public:
@@ -49,8 +48,6 @@ private:
     Scope<ImGuiRenderer> m_imguiRenderer;
 
     Scope<Raytracer> m_raytracer;
-
-    Scope<Viewport> m_viewport;
 };
 
 }

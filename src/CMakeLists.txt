@@ -6,12 +6,17 @@ set(TRAYRACER2_SOURCES
         core/application.cpp
         gui/viewport.cpp
         gui/dockspace.cpp
+        gui/scene_overview.cpp
+        gui/object_properties.cpp
+        gui/settings_ui.cpp
+        gui/menu_bar.cpp
         imgui/imgui.cpp
         imgui/imgui_renderer.cpp
         rendering/renderer_api.cpp
         rendering/render_command.cpp
         rendering/texture2d.cpp
         tracing/raytracer.cpp
+        tracing/scene.cpp
         platform/linux/linux_window.cpp
         platform/linux/linux_input.cpp
         platform/opengl/opengl_context.cpp

@@ -28,6 +28,8 @@ Raytracer::Raytracer()
 {
     m_renderTarget = Texture2D::create(512, 512);
     m_buffer = (Color*)malloc(512 * 512 * sizeof(Color));
+
+    m_scene = createRef<Scene>();
 }
 
 void Raytracer::trace()

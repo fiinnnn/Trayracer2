@@ -4,15 +4,16 @@
 
 namespace Trayracer2 {
 
-void Viewport::show(const std::string& title, Raytracer& raytracer)
+void Viewport::show(Raytracer& raytracer)
 {
-    ImGui::Begin(title.c_str(), nullptr, ImGuiWindowFlags_NoScrollWithMouse);
-    if (ImGui::GetWindowWidth() != m_size.x || ImGui::GetWindowHeight() != m_size.y) {
-        m_size.x = ImGui::GetWindowWidth();
-        m_size.y = ImGui::GetWindowHeight();
-        raytracer.resize((unsigned int) m_size.x, (unsigned int) m_size.y);
+    ImGui::Begin("Viewport", nullptr, ImGuiWindowFlags_NoScrollWithMouse);
+    if ((float) raytracer.getWidth() != ImGui::GetWindowWidth() ||
+        (float) raytracer.getHeight() != ImGui::GetWindowHeight()) {
+        raytracer.resize((unsigned int) ImGui::GetWindowWidth(),
+                         (unsigned int) ImGui::GetWindowHeight());
     }
-    ImGui::Image((void*) raytracer.getRenderTargetID(), ImGui::GetContentRegionAvail());
+    ImGui::Image((void*) raytracer.getRenderTargetID(),
+                 ImGui::GetContentRegionAvail());
     ImGui::End();
 }
 
