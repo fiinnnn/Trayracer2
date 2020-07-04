@@ -1,11 +1,11 @@
 #include "render_command.h"
 
-#include "platform/opengl/opengl_renderer_api.h"
+#include "core/core.h"
 
 namespace Trayracer2 {
 
 class RendererAPI;
 
-RendererAPI* RenderCommand::m_rendererAPI = new OpenGLRendererAPI();
+Scope<RendererAPI> RenderCommand::m_rendererAPI = RendererAPI::create();
 
 }

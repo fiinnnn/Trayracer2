@@ -23,29 +23,21 @@ namespace Trayracer2 {
 
 Application* Application::m_instance = nullptr;
 
-Application::Application()
+Application::Application() : m_viewport()
 {
     ASSERT(!m_instance, "Application already exists");
     m_instance = this;
 
-    m_window = std::unique_ptr<Window>(Window::create());
+    m_window = Scope<Window>(Window::create());
     m_window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
+
+    RenderCommand::init();
+
+    m_raytracer = createScope<Raytracer>();
 
     m_imguiRenderer = createScope<ImGuiRenderer>();
 
-    m_renderTargetTexture = Texture2D::create(512, 512);
-
-    // temporary test texture
-    float buffer[512 * 512 * 3];
-    for (int i = 0; i < 512 * 512 * 3; i += 3) {
-        if (i % 10) {
-            buffer[i] = 1.0;
-            buffer[i + 1] = 0.5;
-            buffer[i + 3] = 0.0;
-        }
-    }
-
-    m_renderTargetTexture->update((void*) buffer);
+    m_viewport = createScope<Viewport>();
 
     LOG_INFO("Application initialized");
 }
@@ -68,7 +60,9 @@ void Application::run()
         m_imguiRenderer->begin();
 
         Dockspace::show();
-        Viewport::show("Viewport", m_renderTargetTexture->getID());
+        m_viewport->show("Viewport", *m_raytracer);
+
+        m_raytracer->trace();
 
         m_imguiRenderer->end();
     }

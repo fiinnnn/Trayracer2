@@ -3,6 +3,8 @@
 
 #include <glm/glm.hpp>
 
+#include "core/core.h"
+
 namespace Trayracer2 {
 
 class RendererAPI {
@@ -12,11 +14,17 @@ public:
         OpenGL = 1
     };
 
-    inline static API getAPI()
-    { return m_api; }
+public:
+    virtual ~RendererAPI() = default;
+
+    virtual void init() = 0;
 
     virtual void setClearColor(const glm::vec4& color) = 0;
     virtual void clear() = 0;
+
+    static API getAPI()
+    { return m_api; }
+    static Scope<RendererAPI> create();
 
 private:
     static API m_api;

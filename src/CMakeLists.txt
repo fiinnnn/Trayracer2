@@ -11,6 +11,7 @@ set(TRAYRACER2_SOURCES
         rendering/renderer_api.cpp
         rendering/render_command.cpp
         rendering/texture2d.cpp
+        tracing/raytracer.cpp
         platform/linux/linux_window.cpp
         platform/linux/linux_input.cpp
         platform/opengl/opengl_context.cpp

@@ -15,6 +15,8 @@ public:
 
     void update(void* buffer) override;
 
+    void resize(unsigned int width, unsigned int height) override;
+
 private:
     unsigned int m_id = 0;
 };

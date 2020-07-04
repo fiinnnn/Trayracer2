@@ -3,13 +3,19 @@
 
 #include <glm/glm.hpp>
 
+#include "core/core.h"
 #include "renderer_api.h"
 
 namespace Trayracer2 {
 
 class RenderCommand {
 public:
-    inline static void setClearColor(const glm::vec4& color)
+    static void init()
+    {
+        m_rendererAPI->init();
+    }
+
+    static void setClearColor(const glm::vec4& color)
     {
         m_rendererAPI->setClearColor(color);
     }
@@ -20,7 +26,7 @@ public:
     }
 
 private:
-    static RendererAPI* m_rendererAPI;
+    static Scope<RendererAPI> m_rendererAPI;
 };
 
 }

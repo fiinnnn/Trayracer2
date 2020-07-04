@@ -9,14 +9,12 @@
 namespace Trayracer2 {
 
 class Window;
-
 class Event;
-
 class WindowClosedEvent;
-
 class ImGuiRenderer;
-
 class Texture2D;
+class Raytracer;
+class Viewport;
 
 class Application {
 public:
@@ -50,7 +48,9 @@ private:
 
     Scope<ImGuiRenderer> m_imguiRenderer;
 
-    Ref<Texture2D> m_renderTargetTexture;
+    Scope<Raytracer> m_raytracer;
+
+    Scope<Viewport> m_viewport;
 };
 
 }

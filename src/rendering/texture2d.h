@@ -21,6 +21,8 @@ public:
 
     virtual void update(void* buffer) = 0;
 
+    virtual void resize(unsigned int width, unsigned int height) = 0;
+
 protected:
     Texture2D(unsigned int width, unsigned int height);
 
