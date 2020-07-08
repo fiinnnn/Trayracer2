@@ -2,7 +2,8 @@
 
 #include <glm/glm.hpp>
 
-#include <memory>
+#include <imgui.h>
+#include <metrics_gui.h>
 
 #include "core.h"
 #include "window.h"
@@ -40,6 +41,13 @@ Application::Application()
 
     m_imguiRenderer = createScope<ImGuiRenderer>();
 
+    m_metric = createScope<MetricsGuiMetric>("Frame time:", "s", MetricsGuiMetric::USE_SI_UNIT_PREFIX);
+    m_metric->mSelected = true;
+
+    m_plot = createScope<MetricsGuiPlot>();
+
+    m_plot->AddMetric(m_metric.get());
+
     LOG_INFO("Application initialized");
 }
 
@@ -60,17 +68,34 @@ void Application::run()
 
         m_imguiRenderer->begin();
 
+        m_metric->AddNewValue(1.0f / ImGui::GetIO().Framerate);
+        m_plot->UpdateAxes();
+
+        m_plot->mShowAverage = true;
+        m_plot->mShowLegendAverage = true;
+        m_plot->mPlotRowCount = 8;
+        m_plot->mShowLegendColor = false;
+
         Dockspace::show();
+
+        ImGui::Begin("Performance");
+        m_plot->DrawHistory();
+        ImGui::End();
+
         Viewport::show(*m_raytracer);
         SceneOverview::show(m_raytracer->getScene());
         ObjectProperties::show();
         SettingsUI::show();
         MenuBar::show();
 
-        //m_raytracer->trace();
+        m_raytracer->trace();
 
         m_imguiRenderer->end();
     }
+}
+
+void Application::exit() {
+    m_running = false;
 }
 
 void Application::onEvent(const Ref<Event>& e)

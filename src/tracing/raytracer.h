@@ -5,7 +5,8 @@
 
 #include "core/core.h"
 #include "rendering/texture2d.h"
-#include "scene.h"
+#include "tracing/scene.h"
+#include "tracing/ray.h"
 
 namespace Trayracer2 {
 
@@ -16,14 +17,6 @@ struct Color {
     float r;
     float g;
     float b;
-};
-
-struct Ray {
-    Ray(glm::vec3 o, glm::vec3 d) : origin(o), dir(d)
-    {}
-
-    glm::vec3 origin;
-    glm::vec3 dir;
 };
 
 class Raytracer {

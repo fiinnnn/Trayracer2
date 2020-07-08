@@ -7,6 +7,7 @@ namespace Trayracer2 {
 void SettingsUI::show()
 {
     ImGui::Begin("Settings");
+
     ImGui::End();
 }
 

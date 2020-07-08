@@ -4,6 +4,8 @@
 #include <memory>
 #include <queue>
 
+#include <metrics_gui.h>
+
 #include "core.h"
 
 namespace Trayracer2 {
@@ -22,6 +24,8 @@ public:
     virtual ~Application();
 
     void run();
+
+    void exit();
 
     void onEvent(const Ref<Event>& e);
 
@@ -48,6 +52,9 @@ private:
     Scope<ImGuiRenderer> m_imguiRenderer;
 
     Scope<Raytracer> m_raytracer;
+
+    Scope<MetricsGuiMetric> m_metric;
+    Scope<MetricsGuiPlot> m_plot;
 };
 
 }

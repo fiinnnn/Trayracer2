@@ -4,28 +4,27 @@
 #include <vector>
 #include <glm/glm.hpp>
 
+#include "core/core.h"
+#include "ray.h"
+#include "intersection.h"
+
 namespace Trayracer2 {
 
-struct Sphere {
-    Sphere(glm::vec3 position, float r) : position(position), r(r)
-    {}
-
-    glm::vec3 position;
-    float r;
-};
+class SceneObject;
 
 class Scene {
 public:
     Scene();
 
-    void addSphere(glm::vec3 pos, float r);
-    void removeSphere(int i);
+    void addObject(Ref<SceneObject> obj);
 
-    [[nodiscard]] std::vector<Sphere> getSpheres() const
-    { return m_spheres; }
+    [[nodiscard]] const std::vector<Ref<SceneObject>>& getObjects() const
+    { return m_objects; }
+
+    [[nodiscard]] Intersection intersect(const Ray& ray) const;
 
 private:
-    std::vector<Sphere> m_spheres;
+    std::vector<Ref<SceneObject>> m_objects;
 };
 
 }
