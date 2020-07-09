@@ -4,14 +4,14 @@
 
 namespace Trayracer2 {
 
-Scene::Scene()
-{
-    addObject(createRef<Sphere>(glm::vec3(0, 0, -2.0), 1.0f));
-}
-
 void Scene::addObject(Ref<SceneObject> obj)
 {
-    m_objects.push_back(obj);
+    m_objects.insert(obj);
+}
+
+void Scene::removeObject(Ref<SceneObject> obj)
+{
+    m_objects.erase(obj);
 }
 
 Intersection Scene::intersect(const Ray& ray) const {

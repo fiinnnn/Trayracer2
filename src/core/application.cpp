@@ -2,9 +2,6 @@
 
 #include <glm/glm.hpp>
 
-#include <imgui.h>
-#include <metrics_gui.h>
-
 #include "core.h"
 #include "window.h"
 
@@ -16,12 +13,7 @@
 
 #include "rendering/render_command.h"
 
-#include "gui/viewport.h"
-#include "gui/dockspace.h"
-#include "gui/scene_overview.h"
-#include "gui/object_properties.h"
-#include "gui/settings_ui.h"
-#include "gui/menu_bar.h"
+#include "gui/gui.h"
 
 namespace Trayracer2 {
 
@@ -41,12 +33,7 @@ Application::Application()
 
     m_imguiRenderer = createScope<ImGuiRenderer>();
 
-    m_metric = createScope<MetricsGuiMetric>("Frame time:", "s", MetricsGuiMetric::USE_SI_UNIT_PREFIX);
-    m_metric->mSelected = true;
-
-    m_plot = createScope<MetricsGuiPlot>();
-
-    m_plot->AddMetric(m_metric.get());
+    m_gui = createScope<GUI>();
 
     LOG_INFO("Application initialized");
 }
@@ -68,25 +55,7 @@ void Application::run()
 
         m_imguiRenderer->begin();
 
-        m_metric->AddNewValue(1.0f / ImGui::GetIO().Framerate);
-        m_plot->UpdateAxes();
-
-        m_plot->mShowAverage = true;
-        m_plot->mShowLegendAverage = true;
-        m_plot->mPlotRowCount = 8;
-        m_plot->mShowLegendColor = false;
-
-        Dockspace::show();
-
-        ImGui::Begin("Performance");
-        m_plot->DrawHistory();
-        ImGui::End();
-
-        Viewport::show(*m_raytracer);
-        SceneOverview::show(m_raytracer->getScene());
-        ObjectProperties::show();
-        SettingsUI::show();
-        MenuBar::show();
+        m_gui->show(*m_raytracer);
 
         m_raytracer->trace();
 

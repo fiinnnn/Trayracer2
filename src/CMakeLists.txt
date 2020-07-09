@@ -4,12 +4,13 @@ set(TRAYRACER2_SOURCES
         core/main.cpp
         core/log.cpp
         core/application.cpp
+        gui/gui.cpp
         gui/viewport.cpp
         gui/dockspace.cpp
-        gui/scene_overview.cpp
-        gui/object_properties.cpp
+        gui/scene_ui.cpp
         gui/settings_ui.cpp
         gui/menu_bar.cpp
+        gui/metrics_ui.cpp
         imgui/imgui.cpp
         imgui/imgui_renderer.cpp
         rendering/renderer_api.cpp

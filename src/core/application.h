@@ -4,9 +4,8 @@
 #include <memory>
 #include <queue>
 
-#include <metrics_gui.h>
-
 #include "core.h"
+#include "gui/gui.h"
 
 namespace Trayracer2 {
 
@@ -49,12 +48,11 @@ private:
 
     std::queue<Ref<Event>> m_eventQueue;
 
-    Scope<ImGuiRenderer> m_imguiRenderer;
-
     Scope<Raytracer> m_raytracer;
 
-    Scope<MetricsGuiMetric> m_metric;
-    Scope<MetricsGuiPlot> m_plot;
+    Scope<ImGuiRenderer> m_imguiRenderer;
+
+    Scope<GUI> m_gui;
 };
 
 }
