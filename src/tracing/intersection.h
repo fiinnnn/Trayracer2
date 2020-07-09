@@ -8,13 +8,13 @@ class SceneObject;
 struct Intersection {
     Intersection() = default;
 
-    Intersection(bool hit, float dist, const SceneObject* object) : hit(hit),
+    Intersection(bool hit, float dist, SceneObject* object) : hit(hit),
                                                                     dist(dist),
                                                                     object(object) {}
 
     bool hit;
     float dist;
-    const SceneObject* object;
+    SceneObject* object;
 };
 
 }

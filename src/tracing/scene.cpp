@@ -4,17 +4,17 @@
 
 namespace Trayracer2 {
 
-void Scene::addObject(Ref<SceneObject> obj)
+void Scene::addObject(const Ref<SceneObject>& obj)
 {
     m_objects.insert(obj);
 }
 
-void Scene::removeObject(Ref<SceneObject> obj)
+void Scene::removeObject(const Ref<SceneObject>& obj)
 {
     m_objects.erase(obj);
 }
 
-Intersection Scene::intersect(const Ray& ray) const {
+Intersection Scene::intersect(const Ray& ray) {
     float mindist = 1000000; //TODO: set far clip plane
     Intersection i{};
     for (auto& object : m_objects) {

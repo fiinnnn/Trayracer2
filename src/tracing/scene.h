@@ -14,13 +14,13 @@ class SceneObject;
 
 class Scene {
 public:
-    void addObject(Ref<SceneObject> obj);
-    void removeObject(Ref<SceneObject> obj);
+    void addObject(const Ref<SceneObject>& obj);
+    void removeObject(const Ref<SceneObject>& obj);
 
     [[nodiscard]] const std::unordered_set<Ref<SceneObject>>& getObjects() const
     { return m_objects; }
 
-    [[nodiscard]] Intersection intersect(const Ray& ray) const;
+    [[nodiscard]] Intersection intersect(const Ray& ray);
 
 private:
     std::unordered_set<Ref<SceneObject>> m_objects;

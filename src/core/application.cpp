@@ -47,9 +47,6 @@ void Application::run()
 
         handleEvents();
 
-        if (Input::keyPressed(KEY_ESCAPE))
-            m_running = false;
-
         RenderCommand::setClearColor(glm::vec4(0.2, 0.2, 0.2, 1.0));
         RenderCommand::clear();
 

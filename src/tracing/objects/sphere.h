@@ -16,11 +16,13 @@ public:
                m_pos(glm::vec3(0, 0, 0)), m_r(1.0f)
     {}
 
-    Sphere(const glm::vec3& pos, float r, const std::string& name = "Sphere")
-            : SceneObject(name, ObjectType::Sphere), m_pos(pos), m_r(r)
+    Sphere(const glm::vec3& pos, float r, const std::string& name = "Sphere",
+           Material material = Material())
+            : SceneObject(name, ObjectType::Sphere, material),
+              m_pos(pos), m_r(r)
     {}
 
-    [[nodiscard]] Intersection intersect(const Ray& ray) const override;
+    [[nodiscard]] Intersection intersect(const Ray& ray) override;
 
     void showPropertiesUI() override;
 

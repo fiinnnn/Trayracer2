@@ -5,6 +5,7 @@
 
 #include "tracing/ray.h"
 #include "tracing/intersection.h"
+#include "tracing/material.h"
 
 namespace Trayracer2 {
 
@@ -18,9 +19,13 @@ public:
         : m_name(name), m_type(type)
     {}
 
+    SceneObject(const std::string& name, ObjectType type, Material material)
+        : m_name(name), m_type(type), m_material(material)
+    {}
+
     virtual ~SceneObject() = default;
 
-    [[nodiscard]] virtual Intersection intersect(const Ray& ray) const = 0;
+    [[nodiscard]] virtual Intersection intersect(const Ray& ray) = 0;
 
     virtual void showPropertiesUI() = 0;
 
@@ -41,9 +46,13 @@ public:
         }
     }
 
+    [[nodiscard]] Material& getMaterial()
+    { return m_material; }
+
 private:
     std::string m_name;
     ObjectType m_type;
+    Material m_material;
 };
 
 }

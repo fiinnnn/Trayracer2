@@ -10,15 +10,6 @@
 
 namespace Trayracer2 {
 
-struct Color {
-    Color(float r, float g, float b) : r(r), g(g), b(b)
-    {}
-
-    float r;
-    float g;
-    float b;
-};
-
 class Raytracer {
 public:
     Raytracer();
@@ -41,7 +32,7 @@ public:
 
 private:
     Ref<Texture2D> m_renderTarget;
-    Color* m_buffer;
+    glm::vec3* m_buffer;
 
     Ref<Scene> m_scene;
 };

@@ -17,6 +17,7 @@ set(TRAYRACER2_SOURCES
         rendering/render_command.cpp
         rendering/texture2d.cpp
         tracing/raytracer.cpp
+        tracing/material.cpp
         tracing/scene.cpp
         tracing/objects/sphere.cpp
         platform/linux/linux_window.cpp

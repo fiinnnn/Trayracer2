@@ -5,7 +5,7 @@
 
 namespace Trayracer2 {
 
-Intersection Sphere::intersect(const Ray &ray) const
+Intersection Sphere::intersect(const Ray &ray)
 {
     Intersection i(false, 1000000, nullptr); //TODO: set far clip dist
 
@@ -44,12 +44,12 @@ void Sphere::showPropertiesUI()
 
     ImGui::Separator();
 
-    if (ImGui::CollapsingHeader("Sphere", nullptr, ImGuiTreeNodeFlags_DefaultOpen)) {
+    if (ImGui::CollapsingHeader("Sphere", ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::InputFloat3("Position", glm::value_ptr(m_pos));
         ImGui::InputFloat("Radius", &m_r, 0.1f);
     }
 
-    ImGui::CollapsingHeader("Material");
+    getMaterial().showPropertiesUI();
 }
 
 }
